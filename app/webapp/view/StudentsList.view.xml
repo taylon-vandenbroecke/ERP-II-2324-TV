@@ -1,0 +1,114 @@
+<mvc:View controllerName="app.controller.StudentsList" displayBlock="true" height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:svm="sap.ui.comp.smartvariants">
+	<Page id="Students" title="All Students List" >
+		<f:DynamicPage headerExpanded="{/headerExpanded}">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
+					</f:heading>
+					<f:expandedContent>
+						<Label id="expandedLabel" text="No Filters" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label id="snappedLabel" text="No Filters" />
+					</f:snappedContent>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:header>
+				<f:DynamicPageHeader>
+					<f:content>
+						<FlexBox justifyContent="End" alignItems="Center" width="100%">
+								<Button text="Back" press=".onBack" />
+						</FlexBox>
+						<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="EventNaam" label="{i18n>eventNaamNummerFilter}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<SearchField search=".onSearchNaam" width="100%" placeholder="{i18n>eventNaamNummerFilterPlaceholder}" />
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="EventLocation" label="{i18n>eventLocatieFilter}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<SearchField search=".onSearchLocation" liveChange=".onSearchLocation" width="100%" placeholder="{i18n>eventLocatieFilterPlaceholder}" />
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="beginDatum" label="{i18n>eventBeginDatumFilter}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<DatePicker name="beginDatum" showCurrentDateButton="true" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change=".onSearchBeginDate" />
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="EindDatum" label="{i18n>eventEindDatumFilter}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<DatePicker name="EindDatum" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change=".onSearchEndDate" />
+									</fb:control>
+								</fb:FilterGroupItem>
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<Table id="eventsTable" selectionChange=".onSelectionChange" noDataText="{i18n>noEventData}" inset="false" items="{
+						path: '/StudentSet',
+						sorter: {
+							path: 'Lastname',
+							descending: true
+						}
+					}">
+					<infoToolbar>
+						<OverflowToolbar visible="false" id="idInfoToolbar">
+							<Label id="idFilterLabel" />
+						</OverflowToolbar>
+					</infoToolbar>
+					<columns>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>eventNaam}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>eventLocatie}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>eventStartDatum}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>eventEindDatum}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>eventPrijs}"/>
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem vAlign="Middle" type="Navigation" press="handleListItemPress">
+							<cells>
+								<Text text="{naam}" />
+								<Text text="{locatie}" />
+								<Text text="{
+									parts: [
+										{path: 'beginDatum', type: 'sap.ui.model.odata.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true }},
+										{path: 'beginUur', targetType:'any', type: 'sap.ui.model.odata.type.Time', formatOptions: { style: 'short', UTC: true }}
+									],
+									formatter: '.myCustomFormatterFunction'
+								}" />
+								<Text text="{
+									parts: [
+										{path: 'eindDatum', type: 'sap.ui.model.odata.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true }},
+										{path: 'eindUur', targetType:'any', type: 'sap.ui.model.odata.type.Time', formatOptions: { style: 'short', UTC: true }}
+									],
+									formatter: '.myCustomFormatterFunction'
+								}" />
+								<Text text="€{prijs}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</f:content>
+		</f:DynamicPage>
+	</Page>
+</mvc:View>

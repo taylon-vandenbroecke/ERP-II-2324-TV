@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZAS_66_STUDENTS_GW_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Game" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Genre" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Genre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Publisher" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Publisher" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Platform" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Platform" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReleaseDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CoverUrl" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Cover URL" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Game Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Favorite" Relationship="ZAS_66_STUDENTS_GW_SRV.Favorite_Game" FromRole="FromRole_Favorite_Game" ToRole="ToRole_Favorite_Game"/>
+            </EntityType>
+            <EntityType Name="Student" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="StudentId"/>
+                </Key>
+                <Property Name="StudentId" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Firstname" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="30 Characters" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lastname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Char" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dob" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Favorite" Relationship="ZAS_66_STUDENTS_GW_SRV.Favorite_Student" FromRole="FromRole_Favorite_Student" ToRole="ToRole_Favorite_Student"/>
+            </EntityType>
+            <EntityType Name="Favorite" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="FavoriteId"/>
+                </Key>
+                <Property Name="FavoriteId" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FkGameid" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FkStudentid" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Game" Relationship="ZAS_66_STUDENTS_GW_SRV.Favorite_Game" FromRole="ToRole_Favorite_Game" ToRole="FromRole_Favorite_Game"/>
+                <NavigationProperty Name="Student" Relationship="ZAS_66_STUDENTS_GW_SRV.Favorite_Student" FromRole="ToRole_Favorite_Student" ToRole="FromRole_Favorite_Student"/>
+            </EntityType>
+            <Association Name="Favorite_Game" sap:content-version="1">
+                <End Type="ZAS_66_STUDENTS_GW_SRV.Game" Multiplicity="1" Role="FromRole_Favorite_Game"/>
+                <End Type="ZAS_66_STUDENTS_GW_SRV.Favorite" Multiplicity="*" Role="ToRole_Favorite_Game"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Favorite_Game">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Favorite_Game">
+                        <PropertyRef Name="FkGameid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Favorite_Student" sap:content-version="1">
+                <End Type="ZAS_66_STUDENTS_GW_SRV.Student" Multiplicity="*" Role="FromRole_Favorite_Student"/>
+                <End Type="ZAS_66_STUDENTS_GW_SRV.Favorite" Multiplicity="1" Role="ToRole_Favorite_Student"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Favorite_Student">
+                        <PropertyRef Name="StudentId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Favorite_Student">
+                        <PropertyRef Name="FkStudentid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZAS_66_STUDENTS_GW_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="GameSet" EntityType="ZAS_66_STUDENTS_GW_SRV.Game" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="StudentSet" EntityType="ZAS_66_STUDENTS_GW_SRV.Student" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="FavoriteSet" EntityType="ZAS_66_STUDENTS_GW_SRV.Favorite" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Favorite_StudentSet" Association="ZAS_66_STUDENTS_GW_SRV.Favorite_Student" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="StudentSet" Role="FromRole_Favorite_Student"/>
+                    <End EntitySet="FavoriteSet" Role="ToRole_Favorite_Student"/>
+                </AssociationSet>
+                <AssociationSet Name="Favorite_GameSet" Association="ZAS_66_STUDENTS_GW_SRV.Favorite_Game" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="GameSet" Role="FromRole_Favorite_Game"/>
+                    <End EntitySet="FavoriteSet" Role="ToRole_Favorite_Game"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://A03Z.UCC.OVGU.DE:443/sap/opu/odata/sap/ZAS_66_STUDENTS_GW_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://A03Z.UCC.OVGU.DE:443/sap/opu/odata/sap/ZAS_66_STUDENTS_GW_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

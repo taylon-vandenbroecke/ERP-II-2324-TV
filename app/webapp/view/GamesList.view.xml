@@ -1,0 +1,18 @@
+<mvc:View
+	controllerName="app.controller.GamesList"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<List id="GamesList" headerText="Games List" items="{path: '/GameSet'}" >
+        <CustomListItem id="columnList">
+            <HBox id="GamesHBox">
+                <Image id="GamesImage" width="3rem" src="{CoverUrl}" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+                <VBox id="GamesVBox" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                    <Label id="GamesLink" text="{Name}" class="GameName"/>
+                    <Label id="GamesLabel" text="{Genre}"/>
+                    <Label id="GamesDescription" text="{Description}"/>
+                </VBox>
+            </HBox>
+        </CustomListItem>
+	</List>
+</mvc:View>
