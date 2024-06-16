@@ -1,0 +1,31 @@
+<mvc:View controllerName="app.controller.CreateFavorite"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m" displayBlock="true">
+
+    <Page id="createFavorite" title="Create Favorite Game">
+        <content>
+            <FlexBox justifyContent="Center" alignItems="Center" width="100%" class="panel">
+                <Panel width="50vw" backgroundDesign="Translucent">
+                    <content >
+                        <VBox alignItems="Center">
+                            <l:VerticalLayout class="inputGroup">
+                                <Label text="Game Id" class="input" labelFor="GameName" required="true"/>
+                                <Input id="GameName" class="input" width="100%" placeholder="e.g. Thief" value="{form>/FkGameid}" editable="false"/>
+                            </l:VerticalLayout>
+                            <l:VerticalLayout class="inputGroup">
+                                <Label text="Student Id" class="input" labelFor="studentID" required="true"/>
+                                <Input id="studentID" class="input" width="100%" placeholder="e.g. 202289580" value="{form>/FkStudentid}" />
+                            </l:VerticalLayout>
+                        </VBox>
+                    </content>
+                    <l:HorizontalLayout class="btncreate buttonWidth">
+                        <Button text="Cancel" type="Transparent" press="annuleer" />
+                        <Button id="createEditButton" text="Create Favorite" class="create" type="Emphasized" press="handleEvent"/>
+                    </l:HorizontalLayout>
+                </Panel>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

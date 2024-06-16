@@ -20,7 +20,7 @@
                             </l:VerticalLayout>
                             <l:VerticalLayout class="inputGroup">
                                 <Label text="Student Date Of Birth" class="input" labelFor="Dob" required="true"/>
-                                <DatePicker id="Dob" class="input" width="100%" placeholder="e.g. 2004-06-05" value="{path: 'form>/Dob'}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                                <DatePicker id="Dob" class="input" width="100%" placeholder="e.g. 2004-06-05" value="{path: 'form>/Dob', formatter: '.formatDate'}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
                             </l:VerticalLayout>
                         </VBox>
                     </content>

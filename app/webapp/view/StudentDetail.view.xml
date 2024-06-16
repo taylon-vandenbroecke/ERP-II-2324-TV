@@ -19,7 +19,7 @@
                                 <m:FlexItemData growFactor="1" />
                             </core:layoutData>
                         </core:Icon>
-                        <m:Label text="studentid: {Student/StudentId}" class="sapUiSmallMarginBeginEnd" />
+                        <m:Label text="studentid: {StudentId}" class="sapUiSmallMarginBeginEnd" />
                     </layout:HorizontalLayout>
                     <layout:HorizontalLayout>
                         <core:Icon src="sap-icon://account" class="size2">
@@ -38,7 +38,7 @@
                                 <m:FlexItemData growFactor="1" />
                             </core:layoutData>
                         </core:Icon>
-                        <m:Label text="Date of birth: {Dob}" class="sapUiSmallMarginBeginEnd" />
+                        <m:Label text="Date of birth: {path: 'Dob', formatter: '.formatDateOfBirth'}" class="sapUiSmallMarginBeginEnd" />
                     </layout:HorizontalLayout>
                 </layout:VerticalLayout>
                 <layout:VerticalLayout class="sapUiSmallMarginBeginEnd buttonWidth">
@@ -46,8 +46,6 @@
                     <m:Button text="Add favorite game" type="Emphasized" press="addSessie" visible="true" id="av1" />
                     <m:Button text="Change Student info" type="Attention" press="onEventPressEdit" visible="true" id="av3"/>
                 </layout:VerticalLayout>
-
-
             </m:FlexBox>
         </headerContent>
 
@@ -55,20 +53,19 @@
             <ObjectPageSection titleUppercase="false" id="personal" title="Session">
                 <subSections>
                     <ObjectPageSubSection id="personalSS1" title="Favorite games" titleUppercase="false" visible="true">
-                        <m:Table id="sessiestable" selectionChange=".onSelectionChange" noDataText="No favorites yet!" inset="false" items="{
-			path: '/FavoriteSet'
-		}">
+                        <m:Table id="sessiestable" selectionChange=".onSelectionChange" noDataText="No favorites yet!" inset="false" items="{ path: '/FavoriteSet', parameters: { $expand: 'Game', $filter: 'FkStudentid eq {StudentId}' } }">
                             <m:columns>
                                 <m:Column width="12em">
                                     <m:Text text="Game Name" />
                                 </m:Column>
                                 <m:Column demandPopin="true">
+                                    <m:Text text="Remove from list" />
                                 </m:Column>
                             </m:columns>
                             <m:items>
                                 <m:ColumnListItem vAlign="Middle" press="handleListItemPress">
                                     <m:cells>
-                                        <m:ObjectIdentifier title="Name: {Game/Name}" text="Genre: {Game/Genre}"/>
+                                        <m:ObjectIdentifier title=" {Name} {FkGameid} {FavoriteSet/Name} {Game/Name} {FavoriteSet/Game/Name}" text="{Game/Genre}"/>
                                         <m:Button id="signUpButton" text="Delete game from favorites" type="Emphasized" press="signUp" />
                                     </m:cells>
                                 </m:ColumnListItem>

@@ -85,7 +85,7 @@
 					</columns>
 
 					<items>
-						<ColumnListItem vAlign="Middle" type="Navigation" press="handleListItemPress">
+						<ColumnListItem vAlign="Middle" type="Navigation" press=".handleListItemPress">
 							<cells>
 								<Text text="{StudentId}" />
 								<Text text="{Lastname}" />

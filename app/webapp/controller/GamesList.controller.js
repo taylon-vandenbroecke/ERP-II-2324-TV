@@ -13,8 +13,8 @@ sap.ui.define([
 		onInit: function(oEvent) {
 
 			// create and set JSON Model
-			// this.oModel = new JSONModel(sap.ui.require.toUrl("https://A03Z.UCC.OVGU.DE:443/sap/opu/odata/sap/ZAS_66_STUDENTS_GW_SRV"));
-			// this.getView().setModel(this.oModel);
+			this.oModel = this.getOwnerComponent().getModel("odataModel");
+      		this.getView().setModel(this.oModel);
 		},
 
 		onExit : function() {
@@ -39,6 +39,15 @@ sap.ui.define([
 				}
 			});
 			oDialog.open();
+		},
+		onListItemPress: function(oEvent) {
+			var oSelectedItem = oEvent.getSource().getBindingContext();
+			var sGameId = oSelectedItem.getProperty("Id");
+	
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("CreateFavorite", {
+				FkGameid: sGameId,
+			});
 		},
         goToStudents: function(f) {
             var oRouter = this.getOwnerComponent().getRouter();

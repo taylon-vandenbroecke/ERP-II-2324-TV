@@ -15,27 +15,27 @@ sap.ui.define(
   
         onRouteMatched: function (oEvent) {
           var sRouteName = oEvent.getParameter("name");
-          if (sRouteName === "Events") {
+          if (sRouteName === "StudentsList") {
             this.refreshPage();
           }
         },
   
         refreshPage: function () {
-          var oTable = this.byId("eventsTable");
+          var oTable = this.byId("studentsTable");
           if (oTable) {
-            this.filterFutureEvents(oTable.getBinding("items"));
+            // this.filterFutureEvents(oTable.getBinding("items"));
             oTable.getBinding("items").refresh();
           }
         },
   
         filterFutureEvents: function (oTable) {
-          var oTable = this.byId("eventsTable");
+          var oTable = this.byId("studentsTable");
           if (oTable) {
             var oBinding = oTable.getBinding("items");
             var currentDate = new Date();
             
             // Haal einddatum rechtstreeks op uit de geselecteerde itemcontext
-            var eventDate = new Date(oSelectedItem.getProperty("eindDatum"));
+            var eventDate = new Date(oSelectedItem.getProperty("Lastname"));
             var eventDateObj = new Date(eventDate);
             
             // Filter voor toekomstige evenementen
@@ -164,8 +164,11 @@ sap.ui.define(
           var oSelectedItem = oEvent.getSource().getBindingContext();
           //Retrieve the path of the selected item and strip the starting '/'
           //to avoid an invalid URL
+          // console.log(oSelectedItem);
   
           var sStudentId = oSelectedItem.getProperty("StudentId");
+
+          // console.log(oSelectedItem.getProperty("Firstname"));
   
           var oRouter = this.getOwnerComponent().getRouter();
           oRouter.navTo("StudentDetail", {

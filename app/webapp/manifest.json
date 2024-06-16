@@ -81,7 +81,12 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       },
       "v2model": {
         "dataSource": "v2mainService",
@@ -136,6 +141,11 @@
           "name": "EditStudent",
           "pattern": "StudentsList/{StudentId}/edit",
           "target": ["CreateStudent"]
+        },
+        {
+          "name": "CreateFavorite",
+          "pattern": "Favorite/new/{FkGameid}",
+          "target": ["CreateFavorite"]
         }
       ],
       "targets": {
@@ -166,6 +176,13 @@
           "clearControlAggregation": false,
           "viewId": "CreateStudent",
           "viewName": "CreateStudent"
+        },
+        "CreateFavorite": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "CreateFavorite",
+          "viewName": "CreateFavorite"
         }
       }
     },

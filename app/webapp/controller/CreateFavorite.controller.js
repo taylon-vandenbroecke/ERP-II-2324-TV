@@ -10,34 +10,34 @@ sap.ui.define(
     function (Controller, MessageBox, JSONModel) {
       "use strict";
   
-      return Controller.extend("app.controller.CreateStudent", {
+      return Controller.extend("app.controller.CreateFavorite", {
         onInit: function () {
           var oRouter = this.getOwnerComponent().getRouter();
           oRouter
-            .getRoute("EditStudent")
-            .attachPatternMatched(this._onRouteMatched, this);
-          oRouter
-            .getRoute("CreateStudent")
+            .getRoute("CreateFavorite")
             .attachPatternMatched(this._onRouteMatched, this);
         },
   
         _onRouteMatched: function (oEvent) {
   
+
+  
+          var oArgs = oEvent.getParameter("arguments");
+          var oName = oEvent.getParameter("name");
+
+          console.log(oArgs.FkGameid);
+
           var oRegistreer = {
-            Firstname: "",
-            Lastname: "",
-            Dob: "",
+            FkGameid: parseInt(oArgs.FkGameid),
+            FkStudentid: null,
           };
   
           var oModel = new JSONModel(oRegistreer);
           this.getView().setModel(oModel, "form");
   
-          var oArgs = oEvent.getParameter("arguments");
-          var oName = oEvent.getParameter("name");
-  
-          if (oName == "EditStudent") {
-            this.getEventData(oArgs.StudentId);
-          } else if (oName == "CreateStudent") {
+          if (oName == "EditFavorite") {
+            this.getEventData("gmeid", oArgs.FkGameid);
+          } else if (oName == "CreateFavorite") {
             this._resetCreate();
           }
         },
@@ -55,16 +55,16 @@ sap.ui.define(
   
           var button = this.byId("createEditButton");
           if (button != null) {
-            button.setText("Create Student");
+            button.setText("Create Favorite");
           }
   
           var title = this.byId("createStudent");
           if (title != null) {
-            title.setTitle("Create Student");
+            title.setTitle("Create Favorite");
           }
           
           if (title != null) {
-            title.setTitle("Create Student");
+            title.setTitle("Create Favorite");
           }
         },
   
@@ -98,6 +98,10 @@ sap.ui.define(
   
         createEvent() {
           var oForm = this.getView().getModel("form").getData();
+
+          oForm.FkGameid = parseInt(oForm.FkGameid);
+
+          oForm.FkStudentid = parseInt(oForm.FkStudentid);
   
           // Controlestructuren
           if (!this.validateForm(oForm)) {
@@ -107,17 +111,15 @@ sap.ui.define(
 
           console.log(oForm);
 
-          oForm.Dob = this.formatDate(oForm.Dob);
-
           var cleanedData = this.cleanData(oForm);
 
         //   oForm.Dob = this.deformatDate(oForm.Dob);
   
           var odatamodel = this.getView().getModel("v2model");
   
-          odatamodel.create("/StudentSet", cleanedData, {
+          odatamodel.create("/FavoriteSet", cleanedData, {
             success: function (data, response) {
-              MessageBox.success("Student was created succesfully!", {
+              MessageBox.success("Favorite was created succesfully!", {
                 onClose: function () {
                   window.location.href = "http://localhost:8080/test/flpSandbox.html?sap-client=204&sap-ui-xx-viewCache=false#app-display&/StudentsList/"; 
                 },
@@ -125,15 +127,13 @@ sap.ui.define(
             },
             error: function (error) {
               MessageBox.error(
-                "Creating the student dit not work!"
+                "Adding the Favorite game dit not work!"
               );
             },
           });
         },
         onEditEvent: function () {
           var oForm = this.getView().getModel("form").getData();
-
-          oForm.Dob = parseInt(oForm.Dob);
 
           console.log(oForm);
   

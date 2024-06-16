@@ -3,17 +3,21 @@
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-    <Link id="gotoStudents" text="goto students" press=".goToStudents"/>
-	<List id="GamesList" headerText="Games List" items="{path: '/GameSet'}" >
-        <CustomListItem id="columnList">
-            <HBox id="GamesHBox">
-                <Image id="GamesImage" width="3rem" src="{CoverUrl}" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
-                <VBox id="GamesVBox" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
-                    <Label id="GamesLink" text="{Name}" class="GameName"/>
-                    <Label id="GamesLabel" text="{Genre}"/>
-                    <Label id="GamesDescription" text="{Description}"/>
-                </VBox>
-            </HBox>
-        </CustomListItem>
-	</List>
+    <ScrollContainer id="scrollContainer" vertical="true" horizontal="false" height="100%">
+        <content>
+        <Link id="gotoStudents" text="goto students" press=".goToStudents"/>
+        <List id="GamesList" headerText="Games List (click on image to add to favorite)" items="{path: '/GameSet'}" mode="None" >
+            <CustomListItem id="columnList" press="onListItemPress">
+                <HBox id="GamesHBox" >
+                    <Image id="GamesImage" width="3rem" src="{CoverUrl}" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" press="onListItemPress" />
+                    <VBox id="GamesVBox" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                        <Label id="GamesLink" text="{Name}" class="GameName"/>
+                        <Label id="GamesLabel" text="{Genre}"/>
+                        <Label id="GamesDescription" text="{Description}"/>
+                    </VBox>
+                </HBox>
+            </CustomListItem>
+        </List>
+        </content>
+    </ScrollContainer>
 </mvc:View>
