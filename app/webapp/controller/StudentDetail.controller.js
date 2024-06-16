@@ -105,6 +105,22 @@ sap.ui.define(
   
           oView.bindElement({ path: urlPath });
           this.checkActiveEvent(oArgs.StudentId);
+          //test
+
+          // var oFilter = new Filter(
+          //   "FkStudentid",
+          //   sap.ui.model.FilterOperator.EQ,
+          //   oArgs.StudentId
+          // );
+          // this.getView()
+          //   .byId("sessiestable")
+          //   .getBinding("items")
+          //   .filter([oFilter]);
+  
+          // var oTable = this.getView().byId("sessiestable");
+          // var oBinding = oTable.getBinding("items");
+          // oBinding.sort(new sap.ui.model.Sorter("FkGameid", true, true));
+  
         },
   
         handleListItemPress: function (oEvent) {

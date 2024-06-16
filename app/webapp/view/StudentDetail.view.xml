@@ -53,10 +53,10 @@
             <ObjectPageSection titleUppercase="false" id="personal" title="Session">
                 <subSections>
                     <ObjectPageSubSection id="personalSS1" title="Favorite games" titleUppercase="false" visible="true">
-                        <m:Table id="sessiestable" selectionChange=".onSelectionChange" noDataText="No favorites yet!" inset="false" items="{ path: '/FavoriteSet', parameters: { $expand: 'Game', $filter: 'FkStudentid eq {StudentId}' } }">
+                        <m:Table id="sessiestable" selectionChange=".onSelectionChange" noDataText="No favorites yet!" inset="false" items="{ path: '/FavoriteSet' }">
                             <m:columns>
                                 <m:Column width="12em">
-                                    <m:Text text="Game Name" />
+                                    <m:Text text="Game ID" />
                                 </m:Column>
                                 <m:Column demandPopin="true">
                                     <m:Text text="Remove from list" />
