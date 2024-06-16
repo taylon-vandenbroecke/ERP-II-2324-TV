@@ -39,7 +39,11 @@ sap.ui.define([
 				}
 			});
 			oDialog.open();
-		}
+		},
+        goToStudents: function(f) {
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("StudentsList");
+        },
 
 	});
 

@@ -3,6 +3,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
+    <Link id="gotoStudents" text="goto students" press=".goToStudents"/>
 	<List id="GamesList" headerText="Games List" items="{path: '/GameSet'}" >
         <CustomListItem id="columnList">
             <HBox id="GamesHBox">

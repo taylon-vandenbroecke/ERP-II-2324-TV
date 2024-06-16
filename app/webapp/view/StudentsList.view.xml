@@ -7,7 +7,7 @@
 	xmlns:svm="sap.ui.comp.smartvariants">
 	<Page id="Students" title="All Students List" >
 		<f:DynamicPage headerExpanded="{/headerExpanded}">
-			<f:title>
+			<!-- <f:title>
 				<f:DynamicPageTitle>
 					<f:heading>
 						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
@@ -28,37 +28,37 @@
 						</FlexBox>
 						<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
 							<fb:filterGroupItems>
-								<fb:FilterGroupItem name="EventNaam" label="{i18n>eventNaamNummerFilter}" groupName="Group1" visibleInFilterBar="true">
+								<fb:FilterGroupItem name="StudentID" label="Student ID" groupName="Group1" visibleInFilterBar="true">
 									<fb:control>
-										<SearchField search=".onSearchNaam" width="100%" placeholder="{i18n>eventNaamNummerFilterPlaceholder}" />
+										<SearchField search=".onSearchID" width="100%" placeholder="e.g. 202289580" />
 									</fb:control>
 								</fb:FilterGroupItem>
-								<fb:FilterGroupItem name="EventLocation" label="{i18n>eventLocatieFilter}" groupName="Group1" visibleInFilterBar="true">
+								<fb:FilterGroupItem name="StudentLastname" label="Student Lastname" groupName="Group1" visibleInFilterBar="true">
 									<fb:control>
-										<SearchField search=".onSearchLocation" liveChange=".onSearchLocation" width="100%" placeholder="{i18n>eventLocatieFilterPlaceholder}" />
+										<SearchField search=".onSearchLastName" liveChange=".onSearchLastName" width="100%" placeholder="e.g. Vandenbroecke" />
 									</fb:control>
 								</fb:FilterGroupItem>
-								<fb:FilterGroupItem name="beginDatum" label="{i18n>eventBeginDatumFilter}" groupName="Group1" visibleInFilterBar="true">
+								<fb:FilterGroupItem name="StudentFirstname" label="Student Firstname" groupName="Group1" visibleInFilterBar="true">
 									<fb:control>
-										<DatePicker name="beginDatum" showCurrentDateButton="true" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change=".onSearchBeginDate" />
+										<SearchField search=".onSearchFirstName" liveChange=".onSearchFirstName" width="100%" placeholder="e.g. Taylon" />
 									</fb:control>
 								</fb:FilterGroupItem>
-								<fb:FilterGroupItem name="EindDatum" label="{i18n>eventEindDatumFilter}" groupName="Group1" visibleInFilterBar="true">
+								<fb:FilterGroupItem name="StudentDOB" label="Student Date Of Birth" groupName="Group1" visibleInFilterBar="true">
 									<fb:control>
-										<DatePicker name="EindDatum" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change=".onSearchEndDate" />
+										<DatePicker name="StudentDOB" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change=".onSearchDOB" placeholder="e.g. 2004-06-05"/>
 									</fb:control>
 								</fb:FilterGroupItem>
 							</fb:filterGroupItems>
 						</fb:FilterBar>
 					</f:content>
 				</f:DynamicPageHeader>
-			</f:header>
+			</f:header> -->
 			<f:content>
-				<Table id="eventsTable" selectionChange=".onSelectionChange" noDataText="{i18n>noEventData}" inset="false" items="{
+				<Table id="studentsTable" selectionChange=".onSelectionChange" noDataText="No Data" inset="false" items="{
 						path: '/StudentSet',
 						sorter: {
 							path: 'Lastname',
-							descending: true
+							descending: false
 						}
 					}">
 					<infoToolbar>
@@ -67,43 +67,30 @@
 						</OverflowToolbar>
 					</infoToolbar>
 					<columns>
-						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="{i18n>eventNaam}"/>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="Student ID"/>
 						</Column>
 						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="{i18n>eventLocatie}"/>
+							<Text text="Student Lastname"/>
 						</Column>
 						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="{i18n>eventStartDatum}"/>
+							<Text text="Student Firstname"/>
 						</Column>
 						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="{i18n>eventEindDatum}"/>
-						</Column>
-						<Column minScreenWidth="Tablet" demandPopin="true">
-							<Text text="{i18n>eventPrijs}"/>
+							<Text text="Student Date Of Birth"/>
 						</Column>
 					</columns>
 
 					<items>
 						<ColumnListItem vAlign="Middle" type="Navigation" press="handleListItemPress">
 							<cells>
-								<Text text="{naam}" />
-								<Text text="{locatie}" />
+								<Text text="{StudentId}" />
+								<Text text="{Lastname}" />
+								<Text text="{Firstname}" />
 								<Text text="{
-									parts: [
-										{path: 'beginDatum', type: 'sap.ui.model.odata.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true }},
-										{path: 'beginUur', targetType:'any', type: 'sap.ui.model.odata.type.Time', formatOptions: { style: 'short', UTC: true }}
-									],
-									formatter: '.myCustomFormatterFunction'
-								}" />
-								<Text text="{
-									parts: [
-										{path: 'eindDatum', type: 'sap.ui.model.odata.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', UTC: true }},
-										{path: 'eindUur', targetType:'any', type: 'sap.ui.model.odata.type.Time', formatOptions: { style: 'short', UTC: true }}
-									],
-									formatter: '.myCustomFormatterFunction'
-								}" />
-								<Text text="€{prijs}" />
+                                    path: 'Dob',
+                                    formatter: '.formatDate'
+                                    }"/>
 							</cells>
 						</ColumnListItem>
 					</items>
