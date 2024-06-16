@@ -24,6 +24,15 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "v2mainService": {
+        "uri": "/sap/opu/odata/sap/ZAS_66_STUDENTS_GW_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     }
   },
@@ -73,6 +82,16 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {}
+      },
+      "v2model": {
+        "dataSource": "v2mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       }
     },
     "resources": {
@@ -102,6 +121,21 @@
           "name": "StudentsList",
           "pattern": "StudentsList",
           "target": ["StudentsList"]
+        },
+        {
+          "name": "StudentDetail",
+          "pattern": "StudentsList/{StudentId}",
+          "target": ["StudentDetail"]
+        },
+        {
+          "name": "CreateStudent",
+          "pattern": "StudentsList#/new",
+          "target": ["CreateStudent"]
+        },
+        {
+          "name": "EditStudent",
+          "pattern": "StudentsList/{StudentId}/edit",
+          "target": ["CreateStudent"]
         }
       ],
       "targets": {
@@ -118,6 +152,20 @@
           "clearControlAggregation": false,
           "viewId": "StudentsList",
           "viewName": "StudentsList"
+        },
+        "StudentDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "StudentDetail",
+          "viewName": "StudentDetail"
+        },
+        "CreateStudent": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "CreateStudent",
+          "viewName": "CreateStudent"
         }
       }
     },

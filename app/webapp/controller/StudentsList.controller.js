@@ -7,7 +7,7 @@ sap.ui.define(
     function (Controller, Filter, FilterOperator) {
       "use strict";
   
-      return Controller.extend("p2bspg1.controller.Events", {
+      return Controller.extend("app.controller.StudentsList", {
         onInit: function () {
           var oRouter = this.getOwnerComponent().getRouter();
           oRouter.attachRouteMatched(this.onRouteMatched, this);
@@ -165,11 +165,11 @@ sap.ui.define(
           //Retrieve the path of the selected item and strip the starting '/'
           //to avoid an invalid URL
   
-          var sEventID = oSelectedItem.getProperty("evenementID");
+          var sStudentId = oSelectedItem.getProperty("StudentId");
   
           var oRouter = this.getOwnerComponent().getRouter();
-          oRouter.navTo("EventDetail", {
-            evenementID: sEventID,
+          oRouter.navTo("StudentDetail", {
+            StudentId: sStudentId,
           });
         },
         myCustomFormatterFunction: function(beginDatum, beginUur) {
@@ -201,7 +201,11 @@ sap.ui.define(
             var year = dob.slice(4);
           
             return year + '-' + month + '-' + day;
-          },
+        },
+        newStudent: function () {
+          var oRouter = this.getOwnerComponent().getRouter();
+          oRouter.navTo("CreateStudent");
+        },
         onBack: function () {
           window.location.href = "http://localhost:4004/p2_bsp_g1/webapp/index.html";
         }

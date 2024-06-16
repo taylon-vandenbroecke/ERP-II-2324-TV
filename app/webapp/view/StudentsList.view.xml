@@ -6,6 +6,7 @@
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:svm="sap.ui.comp.smartvariants">
 	<Page id="Students" title="All Students List" >
+	<Link id="linktoNewStudent" text="Create new Student" press=".newStudent"/>
 		<f:DynamicPage headerExpanded="{/headerExpanded}">
 			<!-- <f:title>
 				<f:DynamicPageTitle>
@@ -53,7 +54,9 @@
 					</f:content>
 				</f:DynamicPageHeader>
 			</f:header> -->
+			
 			<f:content>
+				
 				<Table id="studentsTable" selectionChange=".onSelectionChange" noDataText="No Data" inset="false" items="{
 						path: '/StudentSet',
 						sorter: {

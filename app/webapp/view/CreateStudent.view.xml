@@ -1,0 +1,35 @@
+<mvc:View controllerName="app.controller.CreateStudent"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m" displayBlock="true">
+
+    <Page id="createStudent" title="Create Student">
+        <content>
+            <FlexBox justifyContent="Center" alignItems="Center" width="100%" class="panel">
+                <Panel width="50vw" backgroundDesign="Translucent">
+                    <content >
+                        <VBox alignItems="Center">
+                            <l:VerticalLayout class="inputGroup">
+                                <Label text="Student Firstname" class="input" labelFor="Firstname" required="true"/>
+                                <Input id="Firstname" class="input" width="100%" placeholder="e.g. Taylon" value="{form>/Firstname}" />
+                            </l:VerticalLayout>
+                            <l:VerticalLayout class="inputGroup">
+                                <Label text="Student Lastname" class="input" labelFor="Lastname" required="true"/>
+                                <Input id="Lastname" class="input" width="100%" placeholder="e.g. Vandenbroecke" value="{form>/Lastname}" />
+                            </l:VerticalLayout>
+                            <l:VerticalLayout class="inputGroup">
+                                <Label text="Student Date Of Birth" class="input" labelFor="Dob" required="true"/>
+                                <DatePicker id="Dob" class="input" width="100%" placeholder="e.g. 2004-06-05" value="{path: 'form>/Dob'}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                            </l:VerticalLayout>
+                        </VBox>
+                    </content>
+                    <l:HorizontalLayout class="btncreate buttonWidth">
+                        <Button text="Cancel" type="Transparent" press="annuleer" />
+                        <Button id="createEditButton" text="Create student" class="create" type="Emphasized" press="handleEvent"/>
+                    </l:HorizontalLayout>
+                </Panel>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>
